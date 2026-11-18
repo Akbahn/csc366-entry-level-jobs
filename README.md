@@ -25,6 +25,17 @@ This project looks at real job postings to answer one question for computer scie
 
 SerpAPI is the **main source** for entry-level questions. Hacker News is used as a **comparison group**, since most of its posts come from startups hiring experienced engineers.
 
+### Getting the data
+
+The data files are too large to upload to GitHub through the website, so they are stored in Google Drive:
+
+**[Project data folder (Google Drive)](https://drive.google.com/drive/folders/1HvIqlEDyIEtb_P6CljXlcfVkqqcCvZyX?usp=sharing)**
+
+The Drive folder contains:
+- `raw/`: the original JSON files from SerpAPI and Hacker News (never modified)
+- `clean/`: `serp_clean.csv` and `hn_clean.csv`
+- `final/`: `jobs_combined.csv` and `jobs_features.csv` (the final dataset used for analysis)
+
 ---
 
 ## Repository Structure
@@ -38,11 +49,9 @@ SerpAPI is the **main source** for entry-level questions. Hacker News is used as
 │   ├── Combine_Data.ipynb
 │   ├── Feature_Extraction.ipynb
 │   └── Data_Visualization.ipynb
-└── data/
-    ├── raw/      ← original JSON files (never modified)
-    ├── clean/    ← serp_clean.csv, hn_clean.csv
-    └── final/    ← jobs_combined.csv, jobs_features.csv
 ```
+
+The data files are stored separately in [Google Drive](https://drive.google.com/drive/folders/1HvIqlEDyIEtb_P6CljXlcfVkqqcCvZyX?usp=sharing) (see **Getting the data** above).
 
 Every notebook is fully annotated: each step has a short explanation of what was done and why, including notes on where AI was used.
 
@@ -107,17 +116,17 @@ For CS students looking for their first job, the results suggest focusing first 
 
 ## How to Run
 
-The notebooks were written for **Google Colab**. Run them in order (see [`notebooks/README.txt`](notebooks/README.txt)):
+The notebooks were written for **Google Colab**. First, download the data from the [Google Drive folder](https://drive.google.com/drive/folders/1HvIqlEDyIEtb_P6CljXlcfVkqqcCvZyX?usp=sharing). Then run the notebooks in order (see [`notebooks/README.txt`](notebooks/README.txt)), uploading the files listed below to Colab:
 
 | Notebook | Upload to Colab | Output |
 |---|---|---|
-| 1. SerpAPI Data Cleaning | `data/raw/SerpAPI raw data/raw_serpapi_batch1.json` to `raw_serpapi_batch4.json` | `serp_clean.csv` |
-| 2. HN Data Cleaning | `data/raw/raw_hn_24m.json` | `hn_clean.csv` |
+| 1. SerpAPI Data Cleaning | `raw/SerpAPI raw data/raw_serpapi_batch1.json` to `raw_serpapi_batch4.json` | `serp_clean.csv` |
+| 2. HN Data Cleaning | `raw/raw_hn_24m.json` | `hn_clean.csv` |
 | 3. Combine Data | `serp_clean.csv`, `hn_clean.csv` | `jobs_combined.csv` |
 | 4. Feature Extraction | `jobs_combined.csv` | `jobs_features.csv` |
 | 5. Data Visualization | `jobs_features.csv` | charts and summary statistics |
 
-Notebooks 1 and 2 can be run in either order. Every output file is also included in the `data/` folder, so any notebook can be run on its own.
+Notebooks 1 and 2 can be run in either order. Every output file is also included in the Google Drive folder, so any notebook can be run on its own.
 
 ---
 
