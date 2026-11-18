@@ -1,2 +1,129 @@
-# csc366-entry-level-jobs
-What do entry-level software jobs actually require? CSC 366 Group 02
+# What Do Entry-Level Software Jobs Actually Require?
+
+**CSC 366: Principles of Data Science | Group 02**
+**Group members:** Hyder Akbar, Faisal Aman, Andrew Chung, Maycol Medina, Damon Vickers
+
+
+This project looks at real job postings to answer one question for computer science students looking for their first job:
+
+> **What skills, experience, and pay do entry-level software jobs actually require?**
+
+**Sub-questions:**
+1. Which technical skills appear most often in entry-level postings?
+2. Do "entry-level" postings really ask for 2 or more years of experience?
+3. How does salary vary by location and remote status?
+4. Are specific skills associated with higher pay?
+
+---
+
+## Data Sources
+
+| Source | What it is | How it was collected | Size |
+|---|---|---|---|
+| **SerpAPI (Google Jobs)** | Job listings from Google Jobs | 8 entry-level job titles across 8 locations (New York, San Francisco, Seattle, Austin, Boston, Chicago, Denver, and Remote), collected on Oct 24, 2026 in 4 batches because of SerpAPI's search limits | 1,811 listings |
+| **Hacker News "Who is hiring?"** | Monthly threads where companies (mostly startups) post jobs | 24 monthly threads (Nov 2024 to Oct 2026), collected through the Algolia Hacker News API | 7,627 posts |
+
+SerpAPI is the **main source** for entry-level questions. Hacker News is used as a **comparison group**, since most of its posts come from startups hiring experienced engineers.
+
+---
+
+## Repository Structure
+
+```
+├── README.md                          ← you are here
+├── notebooks/
+│   ├── README.txt                     ← run order for the notebooks
+│   ├── SerpAPI_Data_Cleaning.ipynb
+│   ├── HN_Data_Cleaning.ipynb
+│   ├── Combine_Data.ipynb
+│   ├── Feature_Extraction.ipynb
+│   └── Data_Visualization.ipynb
+└── data/
+    ├── raw/      ← original JSON files (never modified)
+    ├── clean/    ← serp_clean.csv, hn_clean.csv
+    └── final/    ← jobs_combined.csv, jobs_features.csv
+```
+
+Every notebook is fully annotated: each step has a short explanation of what was done and why, including notes on where AI was used.
+
+---
+
+## Process
+
+### Step 1: Cleaning the SerpAPI data → [`SerpAPI_Data_Cleaning.ipynb`](notebooks/SerpAPI_Data_Cleaning.ipynb)
+
+Google Jobs stores most of its useful information (salary, job type, remote status, posting age) as a list of tags. These tags were split into their own columns. Salary text such as "63.9K–97.8K a year" or "15–18 an hour" was converted into numbers and then into yearly pay. Locations were standardized to state, using each job's own location rather than the city that was searched, since Google returned about 30% of jobs from outside the searched city. Senior titles, duplicate listings, and salary outliers were flagged.
+
+### Step 2: Cleaning the Hacker News data → [`HN_Data_Cleaning.ipynb`](notebooks/HN_Data_Cleaning.ipynb)
+
+Each Hacker News post is a single block of HTML text with no structured fields, so it needed more work. HTML was removed, the first line of each post was used to find the company, and keyword searches were used to find job type, remote status, seniority, and whether the job is in the US. Salaries were only taken from dollar ranges, so that funding amounts like "\$20M raised" were not mistaken for pay. Comments that were not job posts and monthly reposts of the same ad were flagged.
+
+### Step 3: Combining the datasets → [`Combine_Data.ipynb`](notebooks/Combine_Data.ipynb)
+
+Both cleaned files were built with the same column names, so they could be stacked into one table of 9,437 rows. A `keep_for_analysis` column marks the 6,866 unique, real job postings used in the analysis.
+
+### Step 4: Extracting skills and requirements → [`Feature_Extraction.ipynb`](notebooks/Feature_Extraction.ipynb)
+
+Each job description was searched for 38 skills (Python, Java, SQL, AWS, and so on), years of experience required, degree requirements (required, preferred, or not mentioned), and seniority (entry, senior, mixed, or unspecified). Additional salaries written in the job descriptions were also found. The final dataset is `jobs_features.csv`.
+
+### Step 5: Analysis and visualization → [`Data_Visualization.ipynb`](notebooks/Data_Visualization.ipynb)
+
+Summary statistics and charts for each question: the most and least common skills, entry-level vs. startup skills, how skill demand changed over time, years of experience required, degree requirements, salary by location, remote vs. on-site pay, skills and salary, and a comparison of the two data sources.
+
+### Rules followed throughout
+
+- **The raw data was never modified.** Every notebook writes to a new file.
+- **Flag, don't delete.** Duplicates, senior roles, outliers, and non-job posts are marked with True/False columns instead of being removed, so every decision can be reversed. The only row removed was one Hacker News post with no text.
+- **Missing values were left missing** unless there was real evidence to fill them. Salaries were never filled in with an average.
+
+---
+
+## Key Findings
+
+| | Finding |
+|---|---|
+| **Skills** | Python (50.5%) and Java (47.9%) were by far the most common skills, each appearing in about half of entry-level postings. AI-related skills appeared in 36% of postings when grouped together. |
+| **Experience** | Only about 1 in 4 entry-level postings stated a number of years. Of those, **38% asked for 2+ years** and 18% asked for 3+. |
+| **Degrees** | About two-thirds of entry-level postings mentioned a degree, but only about **one-third clearly required one**. 14% accepted equivalent experience. |
+| **Pay** | The median entry-level salary was **\$90,000**, ranging from \$70,000 in Illinois to \$100,000 in California. Remote and on-site jobs paid about the same. |
+| **Skills and pay** | Postings mentioning Python, machine learning, or Java had higher median salaries. SQL was the only skill linked to lower pay. |
+| **Startups** | Startups on Hacker News leaned toward React, TypeScript, Postgres, and AI agents. Over two years, AI agent tools grew the fastest, while React, machine learning, and AWS made up a smaller share of skills mentioned. |
+
+## What This Means
+
+For CS students looking for their first job, the results suggest focusing first on strong programming skills, especially **Python and Java**, along with tools like **Git and APIs** that appear often in postings. Students should also expect that some "entry-level" jobs will still ask for a year or two of experience, which makes **internships and personal projects** valuable. At the same time, a degree is not always a strict requirement, and **location can change starting pay** by tens of thousands of dollars. Finally, the rapid growth of AI agent tools in startup postings suggests these skills may become more important for entry-level roles in the near future.
+
+---
+
+## Limitations
+
+- Only about half of entry-level postings listed a salary, so salary results are based on a few hundred postings, and some states have small samples.
+- Skills, requirements, and seniority were found with keyword searches, so some postings may be missed or misclassified.
+- The SerpAPI data is a single snapshot from October 2026, and the search titles did not include mobile-specific roles.
+- Hacker News leans toward startups and senior roles, so it is not a representative sample of all jobs.
+- The results show which skills are **associated** with higher pay, not which skills **cause** it.
+
+---
+
+## How to Run
+
+The notebooks were written for **Google Colab**. Run them in order (see [`notebooks/README.txt`](notebooks/README.txt)):
+
+| Notebook | Upload to Colab | Output |
+|---|---|---|
+| 1. SerpAPI Data Cleaning | `data/raw/SerpAPI raw data/raw_serpapi_batch1.json` to `raw_serpapi_batch4.json` | `serp_clean.csv` |
+| 2. HN Data Cleaning | `data/raw/raw_hn_24m.json` | `hn_clean.csv` |
+| 3. Combine Data | `serp_clean.csv`, `hn_clean.csv` | `jobs_combined.csv` |
+| 4. Feature Extraction | `jobs_combined.csv` | `jobs_features.csv` |
+| 5. Data Visualization | `jobs_features.csv` | charts and summary statistics |
+
+Notebooks 1 and 2 can be run in either order. Every output file is also included in the `data/` folder, so any notebook can be run on its own.
+
+---
+
+
+## AI Use
+
+AI (Claude, by Anthropic) was used throughout this project: to plan the data collection within SerpAPI's search limits, explain pandas and regex concepts,debug code, write the regex patterns used for extraction, check output files for errors, and help format the charts. All cleaning and analysis decisions were made and approved by the group.
+
+For full transparency, a detailed AI disclosure is also included in each notebook. Every step where AI was used is marked with an **"AI assistance"** note explaining exactly what AI did in that step.
