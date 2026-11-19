@@ -100,7 +100,16 @@ Summary statistics and charts for each question: the most and least common skill
 
 ## What This Means
 
-For CS students looking for their first job, the results suggest focusing first on strong programming skills, especially **Python and Java**, along with tools like **Git and APIs** that appear often in postings. Students should also expect that some "entry-level" jobs will still ask for a year or two of experience, which makes **internships and personal projects** valuable. At the same time, a degree is not always a strict requirement, and **location can change starting pay** by tens of thousands of dollars. Finally, the rapid growth of AI agent tools in startup postings suggests these skills may become more important for entry-level roles in the near future.
+## What This Means
+For CS students looking for their first job, our findings suggest that having strong programming skills is important, especially in **Python and Java**, since these were the two most common languages in entry-level job postings. Jobs that mentioned Python also had a higher median salary ($95,000 compared to $80,000 for jobs that didn't mention it). Students should also learn tools like **Git and APIs**, since employers often look for more than just one programming language. In fact, entry-level postings mentioned a median of 5 skills per job.
+
+Another thing we found is that **entry-level doesn't always mean no experience**. Some jobs still ask for one or two years of experience, which is why internships and personal projects can be helpful. We even found a few entry-level postings asking for 8 to 10 years of experience. This shows that students should read the actual job description instead of assuming a job requires no experience just because it's labeled entry-level.
+
+We also found that **not every job requires a college degree**. About two-thirds of entry-level postings mentioned a degree, but only about one-third actually required one. Some employers also accepted work experience instead of a degree. **Location made a big difference in salary**, with some areas paying tens of thousands of dollars more than others. However, remote and on-site jobs had similar salaries, so we didn't find much of a pay difference between the two.
+
+The type of company also made a difference in what skills employers wanted. Startups on Hacker News mentioned **React, TypeScript, and Postgres** more often, while entry-level jobs from Google Jobs focused more on **Java, C++, and Agile**. This suggests that students should consider what kind of company they want to work for when deciding which skills to learn. We also noticed that some languages, like PHP, MATLAB, and Kotlin, were rarely mentioned in entry-level postings, even though they are used or taught elsewhere. Just because a language is popular doesn't necessarily mean a lot of entry-level jobs are asking for it.
+
+Lastly, **AI tools are becoming more common**, especially in startup postings. Over the two years we studied, AI agent tools more than doubled their share of skill mentions on Hacker News. While these tools are still not common requirements for entry-level jobs, they could become more important in the future. For now, students should focus on building strong programming skills while also keeping up with newer technologies like AI.
 
 ---
 
