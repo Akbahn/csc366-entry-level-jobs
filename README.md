@@ -123,6 +123,15 @@ Lastly, **AI tools are becoming more common**, especially in startup postings. O
 
 ---
 
+## Problems We Ran Into
+
+- **A salary of \$243.8 million.** One Hacker News post listed a salary as "\$178.5k - \$243,800". Our code mistakenly applied the "k" to both numbers, turning \$243,800 into \$243.8 million. We fixed this by only applying "k" to numbers under 1,000. We also added a check that marks any salary over \$1 million as unclear.
+- **The same jobs being posted multiple times.** Some companies posted the same jobs in different monthly Hacker News threads. We found 1,923 duplicate posts. Instead of deleting them, we added an `is_duplicate` column to identify them and excluded them from our analysis.
+- **How we defined entry-level jobs.** At first, we used our `is_entry_level` column to identify entry-level jobs, but this column also considered years of experience. This created a problem when we tried to find out how much experience entry-level jobs required, since we were using experience to define them in the first place. To avoid this, we used job titles (`seniority == "Entry"`) instead. We found that 38% of these jobs still asked for at least 2 years of experience.
+- **Job postings getting longer over time.** We noticed that Hacker News posts mentioned more skills over time, increasing from an average of 2.35 skills per post to 3.03. This made it seem like almost every skill was becoming more popular. To get a better comparison, we looked at each skill's percentage of all skill mentions instead. This showed that some skills, like React, machine learning, and AWS, were actually becoming less common relative to other skills.
+- **Two columns giving different results for degrees.** We originally had two columns, `needs_degree` and `degree_status`, that used different rules to identify degree requirements. Because of this, they sometimes gave different results for the same job. We fixed this by making `needs_degree` only identify jobs that clearly required a degree and adding `mentions_degree` to track any mention of a degree.
+---
+
 ## How to Run
 
 The notebooks were written for **Google Colab**. First, download the data from the [Google Drive folder](https://drive.google.com/drive/folders/1HvIqlEDyIEtb_P6CljXlcfVkqqcCvZyX?usp=sharing). Then run the notebooks in order (see [`notebooks/README.txt`](notebooks/README.txt)), uploading the files listed below to Colab:
