@@ -91,7 +91,7 @@ Summary statistics and charts for each question: the most and least common skill
 
 | | Finding |
 |---|---|
-| **Skills** | Python (50.5%) and Java (47.9%) were by far the most common skills, each appearing in about half of entry-level postings. AI-related skills appeared in 36% of postings when grouped together. |
+| **Skills** | Python (50.5%) and Java (47.9%) were by far the most common skills, each appearing in about half of entry-level postings. |
 | **Experience** | Only about 1 in 4 entry-level postings stated a number of years. Of those, **38% asked for 2+ years** and 18% asked for 3+. |
 | **Degrees** | About two-thirds of entry-level postings mentioned a degree, but only about **one-third clearly required one**. 14% accepted equivalent experience. |
 | **Pay** | The median entry-level salary was **\$90,000**, ranging from \$70,000 in Illinois to \$100,000 in California. Remote and on-site jobs paid about the same. |
@@ -100,7 +100,6 @@ Summary statistics and charts for each question: the most and least common skill
 
 ## What This Means
 
-## What This Means
 For CS students looking for their first job, our findings suggest that having strong programming skills is important, especially in **Python and Java**, since these were the two most common languages in entry-level job postings. Jobs that mentioned Python also had a higher median salary ($95,000 compared to $80,000 for jobs that didn't mention it). Students should also learn tools like **Git and APIs**, since employers often look for more than just one programming language. In fact, entry-level postings mentioned a median of 5 skills per job.
 
 Another thing we found is that **entry-level doesn't always mean no experience**. Some jobs still ask for one or two years of experience, which is why internships and personal projects can be helpful. We even found a few entry-level postings asking for 8 to 10 years of experience. This shows that students should read the actual job description instead of assuming a job requires no experience just because it's labeled entry-level.
@@ -115,11 +114,12 @@ Lastly, **AI tools are becoming more common**, especially in startup postings. O
 
 ## Limitations
 
-- Only about half of entry-level postings listed a salary, so salary results are based on a few hundred postings, and some states have small samples.
-- Skills, requirements, and seniority were found with keyword searches, so some postings may be missed or misclassified.
-- The SerpAPI data is a single snapshot from October 2026, and the search titles did not include mobile-specific roles.
-- Hacker News leans toward startups and senior roles, so it is not a representative sample of all jobs.
-- The results show which skills are **associated** with higher pay, not which skills **cause** it.
+
+- Only about half of the entry-level job postings included salary information, so our salary analysis is based on a smaller number of jobs. Some states also had very few postings, which could affect how accurate the comparisons are.
+- We used keyword searches to identify skills, job requirements, and experience levels. Because of this, we may have missed some information or incorrectly categorized certain jobs.
+- Our SerpAPI data was collected in October 2026, so it only shows what the job market looked like at that time. We also didn't specifically search for mobile development jobs, so those roles may be underrepresented.
+- Hacker News is mostly used by startups and tends to have more senior-level job postings. Because of this, its results may not reflect the overall job market.
+- While we found that certain skills were linked to higher salaries, this doesn't necessarily mean those skills are the reason for the higher pay. Other factors, such as location, experience, or company type, could also play a role.
 
 ---
 
